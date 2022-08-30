@@ -25,6 +25,7 @@ const About: React.FC = () => {
       <div>
         <h6>Add product</h6>
         <input
+          name="name"
           placeholder="Enter product name"
           value={productToAdd.name}
           onChange={(e) =>
@@ -32,6 +33,7 @@ const About: React.FC = () => {
           }
         />
         <input
+          name="price"
           type="number"
           placeholder="Enter product price"
           value={productToAdd.price}
