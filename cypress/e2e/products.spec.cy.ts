@@ -22,7 +22,7 @@ describe('Home page', () => {
     cy.get("input[name='name']").should("be.visible")
     cy.get("input[name='price']").should("be.visible")
     cy.get("button").contains("Add").should("be.visible")
-    const testName = "test product " + new Date().getMilliseconds()
+    const testName = "test product " + (Date.now()/1000)
     cy.get("input[name='name']").type(testName)
     cy.get("input[name='price']").type("10000")
     cy.get("button").contains("Add").click()
@@ -30,7 +30,9 @@ describe('Home page', () => {
       expect(response?.statusCode).to.eq(201);
       cy.wait("@getListProductAPI").then(() => {
         cy.wait(1000)
-        cy.get("td").contains(testName).should("be.visible")
+        cy.get("tr").last().within(() => {
+          cy.get("td").first().should("contain.text", testName)
+        })
       })
     });
   })
